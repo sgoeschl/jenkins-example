@@ -3,10 +3,10 @@ node { // node/agent
     stage('Deploy') {
     	List<Map<String, String>> jobData = bom.toJobData(params.BOM_CSV)
 
-    	jobData.each { jobData ->
-        	println("Building ${jobData.APPLICATION}-${jobData.VERSION}")
+    	jobData.each { job ->
+        	println("Building ${job.APPLICATION}-${job.VERSION}")
         	println("======================================================================")
-        	build(job: jobData.APPLICATION, parameters: [string(name: 'GIT_REF', value: jobData.GIT_REF), string(name: 'VERSION', value: jobData.VERSION)])
+        	build(job: job.APPLICATION, parameters: [string(name: 'GIT_REF', value: job.GIT_REF), string(name: 'VERSION', value: job.VERSION)])
     	}
     }
 }
