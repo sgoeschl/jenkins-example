@@ -13,6 +13,7 @@
 // @NonCPS
 List<Map<String, String>> toApplicationJobParameterList(String bomVersion) {
     final File bomCsvFile = new File("./bom/${bomVersion}.csv");
+    println bomCsvFile
     final List<Map<String, String>> list = []
     bomCsvFile.text.eachLine { line ->
         // skip header line, e.g. "APPLICATION,VERSION"
