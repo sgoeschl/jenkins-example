@@ -8,11 +8,11 @@
  *     <li>VERSION</li>
  * </ol>
  * @param bomVersion BOM version being deployed
- * @param bomCsvFile CSV containing the application names &amp: versions to be deployed
  * @return list of maps with job parameters
  */
-@NonCPS
-List<Map<String, String>> toApplicationJobParameterList(String bomVersion, File bomCsvFile) {
+// @NonCPS
+List<Map<String, String>> toApplicationJobParameterList(String bomVersion) {
+    final File bomCsvFile = new File("./bom/${bomVersion}.csv");
     final List<Map<String, String>> list = []
     bomCsvFile.text.eachLine { line ->
         // skip header line, e.g. "APPLICATION,VERSION"
