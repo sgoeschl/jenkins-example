@@ -1,8 +1,12 @@
 // Jenkinsfile (Scripted Pipeline)
 node { // node/agent
     stage('Deploy') {
-    	def jobData = bom.toJobData(params.BOM)
-    	echo "${jobData}"
+    	List<Map<String, String>> jobData = bom.toJobData(params.BOM)
+
+    	jobData.each {
+        	println("APPLICATION : ${it.APPLICATION}, VERSION : ${it.VERSION}, GIT_REF : ${it.GIT_REF}");
+    	}
+
 		build(job: "george-api", parameters: [string(name: 'GIT_REF', value: 'master'), string(name: 'VERSION', value: '4.38.0_10')])
 		build(job: "george-importer", parameters: [string(name: 'GIT_REF', value: 'master'), string(name: 'VERSION', value: '4.38.0_11')])
     }
