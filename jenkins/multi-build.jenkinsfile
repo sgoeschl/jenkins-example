@@ -1,6 +1,7 @@
 // Jenkinsfile (Scripted Pipeline)
 node { // node/agent
-  stage('Stage 1') {
-    echo "${BOM}" // echo Hello World
-  }
+    stage('Deploy') {
+		build(job: "george-api", parameters: [string(name: 'GIT_REF', value: 'master'), string(name: 'VERSION', value: '4.38.0_10')])
+		build(job: "george-importer", parameters: [string(name: 'GIT_REF', value: 'master'), string(name: 'VERSION', value: '4.38.0_11')])
+    }
 }
