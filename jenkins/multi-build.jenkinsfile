@@ -5,7 +5,7 @@ node { // node/agent
 
     	jobData.each {
         	println("Building ${it.APPLICATION}-${it.VERSION}")
-        	build(job: ${it.APPLICATION}, parameters: [string(name: 'GIT_REF', value: 'master'), string(name: 'VERSION', value: ${it.VERSION})])
+        	build(job: it.APPLICATION, parameters: [string(name: 'GIT_REF', value: 'master'), string(name: 'VERSION', value: it.VERSION)])
 
     	}
     }
