@@ -13,8 +13,7 @@
 // @NonCPS
 List<Map<String, String>> toApplicationJobParameterList(String bomVersion) {
     def rootDir = pwd()
-    final File bomCsvFile = load "${rootDir}@script/../bom/${bomVersion}.csv"
-    println bomCsvFile.getAbsolutePath()
+    final File bomCsvFile = new File("./bom/${bomVersion}.csv")
     final List<Map<String, String>> list = []
     bomCsvFile.text.eachLine { line ->
         // skip header line, e.g. "APPLICATION,VERSION"
