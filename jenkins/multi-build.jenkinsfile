@@ -4,10 +4,9 @@ node { // node/agent
     	List<Map<String, String>> jobData = bom.toJobData(params.BOM)
 
     	jobData.each {
-        	println("APPLICATION : ${it.APPLICATION}, VERSION : ${it.VERSION}, GIT_REF : ${it.GIT_REF}");
-    	}
+        	println("Building ${it.APPLICATION}-${it.VERSION}")
+        	build(job: ${it.APPLICATION}, parameters: [string(name: 'GIT_REF', value: 'master'), string(name: 'VERSION', value: ${it.VERSION})])
 
-		build(job: "george-api", parameters: [string(name: 'GIT_REF', value: 'master'), string(name: 'VERSION', value: '4.38.0_10')])
-		build(job: "george-importer", parameters: [string(name: 'GIT_REF', value: 'master'), string(name: 'VERSION', value: '4.38.0_11')])
+    	}
     }
 }
