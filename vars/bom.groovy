@@ -2,9 +2,9 @@
 
 List<Map<String, String>> toJobData(String csv) {
     final List<Map<String, String>> result = []
-    csv?.eachLine { line, count ->
-        // skip header line
-        if (count > 0) {
+    csv?.eachLine { line ->
+        // skip CSV header line, i.e. "APPLICATION,VERSION"
+        if (!line.startsWith("APPLICATION")) {
             final List<String> tokens = line.trim().tokenize(",;")
             final Map<String, String> job = [:]
             job["APPLICATION"] = tokens[0]
