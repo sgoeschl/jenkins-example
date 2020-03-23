@@ -1,0 +1,6 @@
+// Jenkinsfile (Scripted Pipeline)
+node { // node/agent
+  stage('Stage 1') {
+    echo "${BOM}" // echo Hello World
+  }
+}
