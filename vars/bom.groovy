@@ -7,18 +7,19 @@
  *     <li>APPLICATION</li>
  *     <li>VERSION</li>
  * </ol>
- * @param csv CSV containing the application names &amp: versions to be deployed.
+ * @param bomVersion BOM version being deployed
+ * @param bomCsvFile CSV containing the application names &amp: versions to be deployed
  * @return list of maps with job parameters
  */
 @NonCPS
-List<Map<String, String>> toApplicationJobParameterList(String csv) {
+List<Map<String, String>> toApplicationJobParameterList(String bomVersion, File bomCsvFile) {
     final List<Map<String, String>> list = []
-    csv?.eachLine { line ->
+    bomCsvFile.text.eachLine { line ->
         // skip header line, e.g. "APPLICATION,VERSION"
         if (!line.trim().isEmpty() && !line.startsWith("APPLICATION")) {
             final List<String> tokens = line.trim().tokenize(",;")
-            final String application = tokens[0].trim()
-            final String version = tokens[1].trim()
+            final String application = tokens.get(0).trim()
+            final String version = tokens.get(1).trim()
             final String gitRef = "master"
             list.add(["APPLICATION": application, "VERSION": version, "GIT_REF": gitRef])
         }

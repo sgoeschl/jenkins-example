@@ -1,12 +1,14 @@
 // Jenkinsfile (Scripted Pipeline)
 node { // node/agent
     stage('Deploy') {
-    	List<Map<String, String>> jobParameters = bom.toApplicationJobParameterList(params.BOM_CSV)
+        String bomVersion = params.VERSION;
+        File bomCsvFile = new File("./bom/${params.VERSION}.csv"
+    	List<Map<String, String>> jobParameters = bom.toApplicationJobParameterList(bomCsvFile)
 
-    	jobParameters.each { job ->
-        	println("Building ${job.APPLICATION}-${job.VERSION}")
+    	jobParameters.each {
+        	println("Building ${it.APPLICATION}-${it.VERSION}")
         	println("======================================================================")
-        	build(job: job.APPLICATION, parameters: [string(name: 'GIT_REF', value: job.GIT_REF), string(name: 'VERSION', value: job.VERSION)])
+        	build(job: it.APPLICATION, parameters: [string(name: 'GIT_REF', value: it.GIT_REF), string(name: 'VERSION', value: it.VERSION)])
     	}
     }
 }
