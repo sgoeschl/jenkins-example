@@ -1,0 +1,8 @@
+// Jenkinsfile (Scripted Pipeline)
+node { // node/agent
+  stage('Stage 1') {
+  	echo "Project: george-importer"
+    echo "GIT_REF: ${GIT_REF}"  // echo Hello World
+    echo "VERSION: ${VERSION}"  // echo Hello World
+  }
+}
