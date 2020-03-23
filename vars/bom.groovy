@@ -1,5 +1,6 @@
 #!groovy
 
+@NonCPS
 List<Map<String, String>> toJobData(String csv) {
     final List<Map<String, String>> result = []
     csv?.eachLine { line ->
