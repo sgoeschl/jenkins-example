@@ -1,9 +1,9 @@
 // Jenkinsfile (Scripted Pipeline)
 node { // node/agent
     stage('Deploy') {
-        String bomVersion = params.VERSION;
-        File bomCsvFile = new File("./bom/${params.VERSION}.csv"
-    	List<Map<String, String>> jobParameters = bom.toApplicationJobParameterList(bomCsvFile)
+        def bomVersion = params.VERSION;
+        def bomCsvFile = new File("./bom/${params.VERSION}.csv"
+    	def jobParameters = bom.toApplicationJobParameterList(bomCsvFile)
 
     	jobParameters.each {
         	println("Building ${it.APPLICATION}-${it.VERSION}")
