@@ -1,9 +1,9 @@
 // Jenkinsfile (Scripted Pipeline)
 node { // node/agent
     stage('Deploy') {
-        def bomVersion = "20.11.0";
-        def bomCsvFile = new File("./bom/${bomVersion}.csv"
-    	def jobParameters = bom.toApplicationJobParameterList(bomCsvFile)
+        bomVersion = "20.11.0";
+        bomCsvFile = new File("./bom/${bomVersion}.csv"
+    	jobParameters = bom.toApplicationJobParameterList(bomCsvFile)
 
     	jobParameters.each {
         	println("Building ${it.APPLICATION}-${it.VERSION}")
